@@ -3,9 +3,7 @@ public class ShopRepository {
 
     private Product[] addToArray(Product[] current, Product product) {
         Product[] tmp = new Product[current.length + 1];
-        for (int i = 0; i < current.length; i++) {
-            tmp[i] = current[i];
-        }
+        System.arraycopy(current, 0, tmp, 0, current.length);
         tmp[tmp.length - 1] = product;
         return tmp;
     }
@@ -28,8 +26,8 @@ public class ShopRepository {
     }
 
     public void remove(int id) {
-        Product existingProduct = findById(id);
-        if (existingProduct == null) {
+        // Проверка на наличие товара
+        if (findById(id) == null) {
             throw new NotFoundException("Element with id: " + id + " not found");
         }
 
